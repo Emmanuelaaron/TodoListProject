@@ -1,0 +1,57 @@
+
+.body {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  padding-top: 31vh;
+}
+
+.todos {
+  display: flex;
+  align-items: center;
+  border-bottom: solid 1px rgb(49, 46, 46);
+  width: 100%;
+  background-color: white;
+}
+
+#todos {
+  width: 40%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+#input {
+  width: 99%;
+  height: 48px;
+  border-left-style: none;
+  border-right-style: none;
+  border-bottom: solid 1px rgb(49, 46, 46);
+  border-top: solid 1px rgb(49, 46, 46);
+}
+
+h3 {
+  padding-left: 15px;
+}
+
+::placeholder {
+  font-style: italic;
+  padding-left: 15px;
+}
+
+.tododesc {
+  margin-left: 15px;
+}
+
+#checkbox {
+  margin-left: 15px;
+}
+
+.footerText {
+  text-align: center;
+}
