@@ -22,8 +22,8 @@ let todoArray = [
     completed: false,
   },
 ];
-// let myArr = todoArray
-if (localStorage.myTodos !== null) {
+
+if (localStorage.myTodos !== undefined) {
   todoArray = JSON.parse(localStorage.myTodos);
 }
 
