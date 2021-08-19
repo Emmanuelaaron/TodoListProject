@@ -1,7 +1,7 @@
 /* eslint-disable no-loop-func */
 import './style.css';
 import updateStatus from './status';
-import { createTodo, deleteTodo } from './todo';
+import { createTodo, deleteTodo, editTodo } from './todo';
 
 let todoArray = [];
 
@@ -24,9 +24,41 @@ const todoListDisplay = () => {
     todoDesc.classList.add('tododesc');
     todoDesc.innerHTML = todoArray[i].description;
 
+    const editForm = document.createElement('form');
+    editForm.id = `editForm_${todoArray[i].index}`;
+    editForm.style.display = 'none';
+
+    const editInput = document.createElement('input');
+    editInput.id = `editInput${todoArray[i].index}`;
+    editInput.classList.add('editInput');
+    editInput.placeholder = todoArray[i].description;
+
+    const editBtn = document.createElement('button');
+    editBtn.id = `editBtn${todoArray[i].index}`;
+    editBtn.style.display = 'none';
+    editBtn.innerText = 'edit';
+
+    editBtn.addEventListener('click', () => {
+      if (editInput.value === '') {
+        editTodo(todoArray[i], todoArray[i].description);
+      } else {
+        editTodo(todoArray[i], editInput.value);
+        updateStorage();
+      }
+    });
+
+    editForm.appendChild(editInput);
+    editForm.appendChild(editBtn);
+
     const todoChecker = document.createElement('input');
     todoChecker.type = 'checkbox';
     todoChecker.id = `checkbox_${todoArray[i].index}`;
+
+    todoDesc.addEventListener('click', () => {
+      todoDesc.style.display = 'none';
+      editForm.style.display = 'block';
+    });
+
     todoChecker.addEventListener('click', () => {
       updateStatus(todoArray[i], todoChecker);
       if (todoDesc.style.textDecoration === 'line-through') {
@@ -48,6 +80,7 @@ const todoListDisplay = () => {
     }
     myTodo.appendChild(todoChecker);
     myTodo.appendChild(todoDesc);
+    myTodo.appendChild(editForm);
     todos.appendChild(myTodo);
   }
 };

@@ -26,7 +26,8 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-#input {
+#input,
+.editInput {
   width: 99%;
   height: 48px;
   border-left-style: none;
