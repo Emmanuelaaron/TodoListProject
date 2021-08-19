@@ -1,28 +1,9 @@
+/* eslint-disable no-loop-func */
 import './style.css';
 import updateStatus from './status';
-import createTodo from "./todo"
+import { createTodo, deleteTodo } from './todo';
 
-let todoArray = [
-  // {
-  //   index: 1,
-  //   description: 'Jogging',
-  //   completed: false,
-  // },
-  // {
-  //   index: 2,
-  //   description: 'Reading a book',
-  //   completed: false,
-  // },
-  // {
-  //   index: 3,
-  //   description: 'Learn coding',
-  //   completed: false,
-  // }, {
-  //   index: 4,
-  //   description: 'Preparing food',
-  //   completed: false,
-  // },
-];
+let todoArray = [];
 
 if (localStorage.myTodos !== undefined) {
   todoArray = JSON.parse(localStorage.myTodos);
@@ -80,13 +61,18 @@ const clearAll = () => {
   divPara.classList.add('footerText');
   divPara.innerText = 'Clear all completed';
   myDiv.appendChild(divPara);
+  myDiv.addEventListener('click', () => {
+    const newArr = deleteTodo(todoArray);
+    todoArray = newArr;
+    updateStorage();
+  });
   return myDiv;
 };
 todos.appendChild(clearAll());
 
-const addBtn = document.getElementById('todoBtn')
-const todoInput = document.getElementById('input')
-addBtn.addEventListener('click', (e) =>{
-  createTodo(todoArray, todoInput)
-  updateStorage()
-})
+const addBtn = document.getElementById('todoBtn');
+const todoInput = document.getElementById('input');
+addBtn.addEventListener('click', () => {
+  createTodo(todoArray, todoInput);
+  updateStorage();
+});
