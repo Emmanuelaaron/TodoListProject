@@ -1,26 +1,27 @@
 import './style.css';
 import updateStatus from './status';
+import createTodo from "./todo"
 
 let todoArray = [
-  {
-    index: 1,
-    description: 'Jogging',
-    completed: false,
-  },
-  {
-    index: 2,
-    description: 'Reading a book',
-    completed: false,
-  },
-  {
-    index: 3,
-    description: 'Learn coding',
-    completed: false,
-  }, {
-    index: 4,
-    description: 'Preparing food',
-    completed: false,
-  },
+  // {
+  //   index: 1,
+  //   description: 'Jogging',
+  //   completed: false,
+  // },
+  // {
+  //   index: 2,
+  //   description: 'Reading a book',
+  //   completed: false,
+  // },
+  // {
+  //   index: 3,
+  //   description: 'Learn coding',
+  //   completed: false,
+  // }, {
+  //   index: 4,
+  //   description: 'Preparing food',
+  //   completed: false,
+  // },
 ];
 
 if (localStorage.myTodos !== undefined) {
@@ -82,3 +83,10 @@ const clearAll = () => {
   return myDiv;
 };
 todos.appendChild(clearAll());
+
+const addBtn = document.getElementById('todoBtn')
+const todoInput = document.getElementById('input')
+addBtn.addEventListener('click', (e) =>{
+  createTodo(todoArray, todoInput)
+  updateStorage()
+})

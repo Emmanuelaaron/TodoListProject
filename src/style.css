@@ -55,3 +55,7 @@ h3 {
 .footerText {
   text-align: center;
 }
+
+#todoBtn{
+  display: none;
+}
