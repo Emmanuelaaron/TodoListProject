@@ -94,13 +94,10 @@ const clearAll = () => {
   divPara.classList.add('footerText');
   divPara.innerText = 'Clear all completed';
   myDiv.appendChild(divPara);
-  myDiv.addEventListener('click', () => {
-    const newArr = deleteTodo(todoArray);
-    todoArray = newArr;
-    updateStorage();
-  });
+
   return myDiv;
 };
+
 todos.appendChild(clearAll());
 
 const addBtn = document.getElementById('todoBtn');
@@ -108,4 +105,20 @@ const todoInput = document.getElementById('input');
 addBtn.addEventListener('click', () => {
   createTodo(todoArray, todoInput);
   updateStorage();
+});
+
+const theFooter = document.getElementsByClassName('footerCard')[0];
+theFooter.addEventListener('click', () => {
+  const newArr = deleteTodo(todoArray);
+  todoArray = newArr;
+  updateStorage();
+  todos.innerHTML = '';
+  todos.innerHTML = `<h3>Today's To Dos</h3>
+  <form>
+      <input type="text" placeholder="Add to your list" id="input" required>
+      <button id="todoBtn">Add</button>
+  </form>
+  `;
+  todoListDisplay();
+  todos.appendChild(clearAll());
 });
