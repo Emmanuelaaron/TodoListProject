@@ -1,27 +1,9 @@
+/* eslint-disable no-loop-func */
 import './style.css';
 import updateStatus from './status';
+import { createTodo, deleteTodo, editTodo } from './todo';
 
-let todoArray = [
-  {
-    index: 1,
-    description: 'Jogging',
-    completed: false,
-  },
-  {
-    index: 2,
-    description: 'Reading a book',
-    completed: false,
-  },
-  {
-    index: 3,
-    description: 'Learn coding',
-    completed: false,
-  }, {
-    index: 4,
-    description: 'Preparing food',
-    completed: false,
-  },
-];
+let todoArray = [];
 
 if (localStorage.myTodos !== undefined) {
   todoArray = JSON.parse(localStorage.myTodos);
@@ -42,9 +24,41 @@ const todoListDisplay = () => {
     todoDesc.classList.add('tododesc');
     todoDesc.innerHTML = todoArray[i].description;
 
+    const editForm = document.createElement('form');
+    editForm.id = `editForm_${todoArray[i].index}`;
+    editForm.style.display = 'none';
+
+    const editInput = document.createElement('input');
+    editInput.id = `editInput${todoArray[i].index}`;
+    editInput.classList.add('editInput');
+    editInput.placeholder = todoArray[i].description;
+
+    const editBtn = document.createElement('button');
+    editBtn.id = `editBtn${todoArray[i].index}`;
+    editBtn.style.display = 'none';
+    editBtn.innerText = 'edit';
+
+    editBtn.addEventListener('click', () => {
+      if (editInput.value === '') {
+        editTodo(todoArray[i], todoArray[i].description);
+      } else {
+        editTodo(todoArray[i], editInput.value);
+        updateStorage();
+      }
+    });
+
+    editForm.appendChild(editInput);
+    editForm.appendChild(editBtn);
+
     const todoChecker = document.createElement('input');
     todoChecker.type = 'checkbox';
     todoChecker.id = `checkbox_${todoArray[i].index}`;
+
+    todoDesc.addEventListener('click', () => {
+      todoDesc.style.display = 'none';
+      editForm.style.display = 'block';
+    });
+
     todoChecker.addEventListener('click', () => {
       updateStatus(todoArray[i], todoChecker);
       if (todoDesc.style.textDecoration === 'line-through') {
@@ -66,6 +80,7 @@ const todoListDisplay = () => {
     }
     myTodo.appendChild(todoChecker);
     myTodo.appendChild(todoDesc);
+    myTodo.appendChild(editForm);
     todos.appendChild(myTodo);
   }
 };
@@ -79,6 +94,31 @@ const clearAll = () => {
   divPara.classList.add('footerText');
   divPara.innerText = 'Clear all completed';
   myDiv.appendChild(divPara);
+
   return myDiv;
 };
+
 todos.appendChild(clearAll());
+
+const addBtn = document.getElementById('todoBtn');
+const todoInput = document.getElementById('input');
+addBtn.addEventListener('click', () => {
+  createTodo(todoArray, todoInput);
+  updateStorage();
+});
+
+const theFooter = document.getElementsByClassName('footerCard')[0];
+theFooter.addEventListener('click', () => {
+  const newArr = deleteTodo(todoArray);
+  todoArray = newArr;
+  updateStorage();
+  todos.innerHTML = '';
+  todos.innerHTML = `<h3>Today's To Dos</h3>
+  <form>
+      <input type="text" placeholder="Add to your list" id="input" required>
+      <button id="todoBtn">Add</button>
+  </form>
+  `;
+  todoListDisplay();
+  todos.appendChild(clearAll());
+});
