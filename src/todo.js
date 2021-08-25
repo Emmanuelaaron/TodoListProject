@@ -3,12 +3,6 @@ const Todo = (index, description, completed) => ({
   index, description, completed,
 });
 
-const createTodo = (arr, todoInput, completed = false) => {
-  const length = arr.length + 1;
-  const newTodo = Todo(length, todoInput.value, completed);
-  arr.push(newTodo);
-};
-
 const IndexArrangement = (arr) => {
   arr.forEach((todo, todoIndex) => {
     todo.index = todoIndex + 1;
@@ -28,5 +22,5 @@ const editTodo = (todo, newDescription) => {
 };
 
 export {
-  createTodo, deleteTodo, editTodo,
+  deleteTodo, editTodo, Todo,
 };

@@ -1,7 +1,8 @@
 /* eslint-disable no-loop-func */
 import './style.css';
 import updateStatus from './status';
-import { createTodo, deleteTodo, editTodo } from './todo';
+import { deleteTodo, editTodo } from './todo';
+import createTodo from './createTodo';
 
 let todoArray = [];
 
@@ -103,7 +104,7 @@ todos.appendChild(clearAll());
 const addBtn = document.getElementById('todoBtn');
 const todoInput = document.getElementById('input');
 addBtn.addEventListener('click', () => {
-  createTodo(todoArray, todoInput);
+  createTodo(todoArray, todoInput.value);
   updateStorage();
 });
 
