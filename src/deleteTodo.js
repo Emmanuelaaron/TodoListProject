@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+
 import { IndexArrangement } from './todo';
 
 const deleteTodo = (arr) => {

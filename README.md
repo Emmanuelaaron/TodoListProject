@@ -23,6 +23,10 @@
 - ```npm run build```
 - ```npm start```
 
+## Testing
+- To run tests in your terminal run 
+- ```npm run test```
+
 - Open ```localhost:8080``` in your browser
 
 
