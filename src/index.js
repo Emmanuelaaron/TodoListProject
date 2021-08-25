@@ -1,8 +1,9 @@
 /* eslint-disable no-loop-func */
 import './style.css';
 import updateStatus from './status';
-import { deleteTodo, editTodo } from './todo';
+import { editTodo } from './todo';
 import createTodo from './createTodo';
+import deleteTodo from './deleteTodo';
 
 let todoArray = [];
 
