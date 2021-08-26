@@ -40,9 +40,7 @@ describe('Create or delete To-do', () => {
     expect(load()[2].index).toBe(3);
     expect(load()[2].description).toBe('Dancing');
   });
-  // });
 
-  // describe('Index Arangement', () => {
   const array = [{ index: 3 }, { index: 1 }, { index: 2 }];
 
   test("arranges all objects' indexes to fit their position in the list", () => {
