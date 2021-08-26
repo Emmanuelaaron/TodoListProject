@@ -1,8 +1,9 @@
 /**
  * @jest-environment jsdom
  */
+
 import { expect, test } from '@jest/globals';
-import { IndexArrangement } from '../src/todo';
+import { IndexArrangement, editTodo } from '../src/todo';
 import deleteTodo from '../src/deleteTodo';
 import createTodo from '../src/createTodo';
 import { load, updateStorage } from '../src/storage';
@@ -48,5 +49,11 @@ describe('Create or delete To-do', () => {
     expect(array[0].index).toBe(1);
     expect(array[1].index).toBe(2);
     expect(array[2].index).toBe(3);
+  });
+
+  test("edit to-do tool", ()=> {
+    editTodo(list[0], 'Mowing');
+    updateStorage(list);
+    expect(load()[0].description).toBe('Mowing');
   });
 });
