@@ -4,16 +4,13 @@ import updateStatus from './status';
 import { editTodo } from './todo';
 import createTodo from './createTodo';
 import deleteTodo from './deleteTodo';
-import {load, updateStorage} from './storage'
+import { load, updateStorage } from './storage';
 
 let todoArray = [];
 
-
 if (localStorage.myTodos !== undefined) {
   todoArray = load();
-  
 }
-
 
 const todos = document.getElementById('todos');
 const todoListDisplay = () => {
