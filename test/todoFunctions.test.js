@@ -55,4 +55,9 @@ describe('Create or delete To-do', () => {
     updateStorage(list);
     expect(load()[0].description).toBe('Mowing');
   });
+
+  test("document format", ()=>{
+    console.log(document.innerHTML);
+    expect(document).toBeTruthy;
+  });
 });
