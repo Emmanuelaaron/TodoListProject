@@ -1,9 +1,23 @@
+/**
+ * @jest-environment jsdom
+ */
+
+import { expect } from '@jest/globals';
 import createTodo from '../src/createTodo';
+import {load, updateStorage} from '../src/storage'
 
 describe('Create To-do', () => {
-  const list = [];
+  let list;
+  if (localStorage.myTodos !== undefined){
+    list = load()
+  }else {
+    list = [];
+  }
+
 
   test('adds an element of description "Coding" and index 1 to list', () => {
-    expect(createTodo(list, 'Coding')).toEqual([{ description: 'Coding', completed: false, index: 1 }]);
+    list = createTodo(list, 'Coding');
+    updateStorage(list);
+    expect(load()).toHaveLength(1);
   });
 });

@@ -4,20 +4,20 @@ import updateStatus from './status';
 import { editTodo } from './todo';
 import createTodo from './createTodo';
 import deleteTodo from './deleteTodo';
+import {load, updateStorage} from './storage'
 
 let todoArray = [];
 
+
 if (localStorage.myTodos !== undefined) {
-  todoArray = JSON.parse(localStorage.myTodos);
+  todoArray = load();
+  
 }
 
-const updateStorage = () => {
-  localStorage.myTodos = JSON.stringify(todoArray);
-};
 
 const todos = document.getElementById('todos');
 const todoListDisplay = () => {
-  updateStorage();
+  updateStorage(todoArray);
   for (let i = 0; i < todoArray.length; i += 1) {
     const myTodo = document.createElement('div');
     myTodo.classList.add('todos');
@@ -45,7 +45,7 @@ const todoListDisplay = () => {
         editTodo(todoArray[i], todoArray[i].description);
       } else {
         editTodo(todoArray[i], editInput.value);
-        updateStorage();
+        updateStorage(todoArray);
       }
     });
 
@@ -73,7 +73,7 @@ const todoListDisplay = () => {
       } else {
         todoChecker.checked = true;
       }
-      updateStorage();
+      updateStorage(todoArray);
     });
 
     if (todoArray[i].completed === true) {
@@ -106,14 +106,14 @@ const addBtn = document.getElementById('todoBtn');
 const todoInput = document.getElementById('input');
 addBtn.addEventListener('click', () => {
   createTodo(todoArray, todoInput.value);
-  updateStorage();
+  updateStorage(todoArray);
 });
 
 const theFooter = document.getElementsByClassName('footerCard')[0];
 theFooter.addEventListener('click', () => {
   const newArr = deleteTodo(todoArray);
   todoArray = newArr;
-  updateStorage();
+  updateStorage(todoArray);
   todos.innerHTML = '';
   todos.innerHTML = `<h3>Today's To Dos</h3>
   <form>
