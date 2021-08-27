@@ -1,3 +1,5 @@
 module.exports = {
-    setupFiles: ["./__mocks__/client.js"],
-  };
+  setupFiles: [
+    './__mocks__/client.js',
+  ],
+};

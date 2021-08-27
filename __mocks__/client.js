@@ -1,13 +1,10 @@
-import { JSDOM } from "jsdom"
-const dom = new JSDOM()
-global.document = dom.window.document
-global.window = dom.window
+import { JSDOM } from 'jsdom';
 
+const dom = new JSDOM();
+global.document = dom.window.document;
+global.window = dom.window;
 
-let div = document.createElement('div');
-
-document.body.innerHTML =
-global.document.innerHTML = `
+document.body.innerHTML = `
     <section class="body">
         <div id="todos">
             <h3>Today's To Dos</h3>
@@ -19,4 +16,3 @@ global.document.innerHTML = `
         </div>
     </section>
 `;
-
