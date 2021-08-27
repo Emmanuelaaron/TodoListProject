@@ -1,13 +1,13 @@
 /**
  * @jest-environment jsdom
  */
-/* eslint-disable no-unused-expressions */
 import { expect, test } from '@jest/globals';
 import { IndexArrangement, editTodo } from '../src/todo';
 import deleteTodo from '../src/deleteTodo';
 import createTodo from '../src/createTodo';
 import { load, updateStorage } from '../src/storage';
 import todoListDisplay from '../src/display';
+import updateStatus from '../src/status';
 
 describe('Create or delete To-do', () => {
   let list;
@@ -59,12 +59,25 @@ describe('Create or delete To-do', () => {
   });
 
   test('document format', () => {
-    expect(document).toBeTruthy;
+    expect(document).toBeTruthy();
   });
 
   test('display todos list', () => {
     todoListDisplay(list);
     const todoDiv = document.querySelector('#todos');
-    expect(todoDiv).toBeTruthy;
+    expect(todoDiv).toBeTruthy();
+  });
+
+  test('update status', () => {
+    let checkBox = document.querySelector('#checkbox_1');
+    updateStatus(list[0], checkBox);
+    updateStorage(list);
+
+    expect(checkBox.checked).toBeTruthy();
+    expect(load()[0].completed).toBeTruthy();
+    updateStatus(list[0], checkBox);
+    updateStorage(list);
+
+    expect(load()[0].completed).toBeFalsy();
   });
 });
