@@ -3,16 +3,11 @@ const dom = new JSDOM()
 global.document = dom.window.document
 global.window = dom.window
 
-global.document.innerHTML = `<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
-</head>
+let div = document.createElement('div');
 
-<body>
+document.body.innerHTML =
+global.document.innerHTML = `
     <section class="body">
         <div id="todos">
             <h3>Today's To Dos</h3>
@@ -23,6 +18,5 @@ global.document.innerHTML = `<!DOCTYPE html>
             
         </div>
     </section>
-</body>
+`;
 
-</html>`;

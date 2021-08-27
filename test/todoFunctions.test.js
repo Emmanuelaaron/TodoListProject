@@ -1,6 +1,7 @@
 /**
  * @jest-environment jsdom
  */
+
 import { expect, test } from '@jest/globals';
 import { IndexArrangement, editTodo } from '../src/todo';
 import deleteTodo from '../src/deleteTodo';
@@ -57,7 +58,7 @@ describe('Create or delete To-do', () => {
   });
 
   test("document format", ()=>{
-    console.log(document.innerHTML);
+    console.log(document.querySelector("form").innerHTML);
     expect(document).toBeTruthy;
   });
 });
