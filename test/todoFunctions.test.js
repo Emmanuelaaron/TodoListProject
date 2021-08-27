@@ -69,7 +69,7 @@ describe('Create or delete To-do', () => {
   });
 
   test('update status', () => {
-    let checkBox = document.querySelector('#checkbox_1');
+    const checkBox = document.querySelector('#checkbox_1');
     updateStatus(list[0], checkBox);
     updateStorage(list);
 
