@@ -2,10 +2,12 @@
  * @jest-environment jsdom
  */
 import { expect, test } from '@jest/globals';
-import { IndexArrangement } from '../src/todo';
+import { IndexArrangement, editTodo } from '../src/todo';
 import deleteTodo from '../src/deleteTodo';
 import createTodo from '../src/createTodo';
 import { load, updateStorage } from '../src/storage';
+import todoListDisplay from '../src/display';
+import updateStatus from '../src/status';
 
 describe('Create or delete To-do', () => {
   let list;
@@ -48,5 +50,34 @@ describe('Create or delete To-do', () => {
     expect(array[0].index).toBe(1);
     expect(array[1].index).toBe(2);
     expect(array[2].index).toBe(3);
+  });
+
+  test('edit to-do tool', () => {
+    editTodo(list[0], 'Mowing');
+    updateStorage(list);
+    expect(load()[0].description).toBe('Mowing');
+  });
+
+  test('document format', () => {
+    expect(document).toBeTruthy();
+  });
+
+  test('display todos list', () => {
+    todoListDisplay(list);
+    const todoDiv = document.querySelector('#todos');
+    expect(todoDiv).toBeTruthy();
+  });
+
+  test('update status', () => {
+    const checkBox = document.querySelector('#checkbox_1');
+    updateStatus(list[0], checkBox);
+    updateStorage(list);
+
+    expect(checkBox.checked).toBeTruthy();
+    expect(load()[0].completed).toBeTruthy();
+    updateStatus(list[0], checkBox);
+    updateStorage(list);
+
+    expect(load()[0].completed).toBeFalsy();
   });
 });

@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+import { JSDOM } from 'jsdom';
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List</title>
-</head>
+const dom = new JSDOM();
+global.document = dom.window.document;
+global.window = dom.window;
 
-<body>
-    <section class="myBody">
+document.body.innerHTML = `
+    <section class="body">
         <div id="todos">
             <h3>Today's To Dos</h3>
             <form>
@@ -18,6 +15,4 @@
             
         </div>
     </section>
-</body>
-
-</html>
+`;
